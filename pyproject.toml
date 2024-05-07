@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cardetector"
+version = "0.1.0"
+description = ""
+authors = ["rashidiy <bubbless7456@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+python-dotenv = "^1.0.1"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
