@@ -115,8 +115,6 @@ class RequestAPI:
             time.sleep(2)
 
 
-def main():
+if __name__ == '__main__':
+    print('Hllo')
     RequestAPI().run()
-
-
-main()

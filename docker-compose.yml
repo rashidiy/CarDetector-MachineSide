@@ -3,7 +3,6 @@ version: '3.8'
 services:
   camera:
     build: .
-    command: python3 main.py
     image: cam_listener
     volumes:
       - ./:/usr/src/app/
