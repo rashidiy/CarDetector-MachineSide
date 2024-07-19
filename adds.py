@@ -7,17 +7,13 @@ def create_service_file(service_name, file_path, device_id, security_key, host, 
     try:
         with open('template.txt') as template_file:
             template = template_file.read()
-        print()
-        print(template.format(
-            description=description,
-            python_path=python_path,
-            file_path=os.path.abspath(file_path),
-            environment=f'"DEVICE_ID={device_id}" "SECURITY_KEY={security_key}" "HOST={host}" "PORT={port}"',
-        ))
-        # with open(service_path, 'w') as service_file:
-        #
-        #
-        #     service_file.write()
+        with open(service_path, 'w') as service_file:
+            service_file.write(template.format(
+                    description=description,
+                    python_path=python_path,
+                    file_path=os.path.abspath(file_path),
+                    environment=f'"DEVICE_ID={device_id}" "SECURITY_KEY={security_key}" "HOST={host}" "PORT={port}"',
+                ))
         print(f"Service file {service_path} created successfully.")
     except IOError as e:
         print(f"Failed to create service file {service_path}: {e}")
