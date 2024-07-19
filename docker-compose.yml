@@ -1,8 +1,0 @@
-version: '3.8'
-
-services:
-  camera:
-    build: .
-    image: cam_listener
-    volumes:
-      - ./:/usr/src/app/
