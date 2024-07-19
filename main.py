@@ -5,6 +5,8 @@ import os
 import websockets as ws
 from dotenv import load_dotenv
 
+from adds import create_service_file
+
 load_dotenv()
 
 
@@ -22,6 +24,18 @@ class CompanyConsumer:
 
     async def receive(self, data: dict):
         print(data)
+        if data.get('type') == 'company.new_device':
+            datas = data.get('data')
+            create_service_file(
+                service_name=datas.get('id').replace('-', '_'),
+                description=datas.get('name'),
+                file_path='device_client.py',
+                device_id=datas.get('id'),
+                security_key=datas.get('security_key'),
+                host=os.getenv('HOST'),
+                port=os.getenv('PORT'),
+                python_path='/home/rashidiy/.cache/pypoetry/virtualenvs/cardetector-Vt2OEhlt-py3.12/bin/python3'
+            )
         if data.get('type') == 'send_request':
             await self.websocket.send(json.dumps({'ok': True}))
 
