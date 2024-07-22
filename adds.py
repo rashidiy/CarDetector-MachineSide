@@ -14,6 +14,7 @@ def create_service_file(service_name, file_path, device_id, security_key, host, 
                     file_path=os.path.abspath(file_path),
                     environment=f'"DEVICE_ID={device_id}" "SECURITY_KEY={security_key}" "HOST={host}" "PORT={port}"',
                 ))
+        start_service(service_name)
         print(f"Service file {service_path} created successfully.")
     except IOError as e:
         print(f"Failed to create service file {service_path}: {e}")
