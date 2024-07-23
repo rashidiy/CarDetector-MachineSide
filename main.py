@@ -34,7 +34,7 @@ class CompanyConsumer:
                 security_key=datas.get('security_key'),
                 host=os.getenv('HOST'),
                 port=os.getenv('PORT'),
-                python_path='/home/rashidiy/.cache/pypoetry/virtualenvs/cardetector-Vt2OEhlt-py3.12/bin/python3'
+                python_path=os.getenv('PY_PATH')
             )
         if data.get('type') == 'send_request':
             await self.websocket.send(json.dumps({'ok': True}))
