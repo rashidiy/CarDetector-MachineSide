@@ -4,6 +4,7 @@ Description={description}
 [Service]
 ExecStart={python_path} {file_path}
 Restart=always
+RestartSec=6
 Environment={environment}
 
 [Install]
