@@ -5,17 +5,14 @@ import os
 
 import requests
 import websockets
-from dotenv import load_dotenv
 from requests.auth import HTTPDigestAuth
 from websockets.legacy import client
-
-load_dotenv()
 
 
 class WServer:
     security_key = os.getenv('SECURITY_KEY')
     device_id = os.getenv('DEVICE_ID')
-    uri = f"ws://{os.getenv('HOST')}:{os.getenv('PORT', 443)}/device/{device_id}/?security_key={security_key}"
+    uri = f"wss://{os.getenv('HOST')}:{os.getenv('PORT', 443)}/device/{device_id}/?security_key={security_key}"
     websocket = client.WebSocketClientProtocol
 
     async def accepted(self):
@@ -64,7 +61,7 @@ class WServer:
                 await self.receive(json.loads(message))
 
     def start(self):
-        asyncio.get_event_loop().run_until_complete(self.connect_to_server())
+        asyncio.run(self.connect_to_server())
 
 
 if __name__ == "__main__":

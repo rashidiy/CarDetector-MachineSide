@@ -47,7 +47,7 @@ class CompanyConsumer:
                 await self.receive(json.loads(message))
 
     def main(self):
-        return asyncio.new_event_loop().run_until_complete(self.connect())
+        return asyncio.run(self.connect())
 
 
 if __name__ == '__main__':
