@@ -14,8 +14,8 @@ class CompanyConsumer:
     company_id: str = os.getenv('COMPANY_ID')
     security_key: str = os.getenv('SECURITY_KEY')
     host: str = os.getenv('HOST')
-    port: int = os.getenv('PORT', 80)
-    url: str = f'ws://{host}:{port}/company/{company_id}/?security_key={security_key}'
+    port: int = os.getenv('PORT', 443)
+    url: str = f'wss://{host}:{port}/company/{company_id}/?security_key={security_key}'
     websocket: ws.WebSocketClientProtocol
 
     async def accepted(self):
@@ -40,6 +40,7 @@ class CompanyConsumer:
             await self.websocket.send(json.dumps({'ok': True}))
 
     async def connect(self):
+        print(self.url)
         async with ws.connect(self.url) as websocket:
             self.websocket = websocket
             await self.accepted()
