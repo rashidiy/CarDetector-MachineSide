@@ -15,7 +15,7 @@ load_dotenv()
 class WServer:
     security_key = os.getenv('SECURITY_KEY')
     device_id = os.getenv('DEVICE_ID')
-    uri = f"ws://{os.getenv('HOST')}:{os.getenv('PORT')}/device/{device_id}/?security_key={security_key}"
+    uri = f"ws://{os.getenv('HOST')}:{os.getenv('PORT', 443)}/device/{device_id}/?security_key={security_key}"
     websocket = client.WebSocketClientProtocol
 
     async def accepted(self):
