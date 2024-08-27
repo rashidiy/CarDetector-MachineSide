@@ -32,8 +32,8 @@ class CompanyConsumer:
                 file_path='device_client.py',
                 device_id=datas.get('id'),
                 security_key=datas.get('security_key'),
-                host=os.getenv('HOST'),
-                port=os.getenv('PORT'),
+                host=self.host,
+                port=self.port,
                 python_path=os.getenv('PY_PATH')
             )
         if data.get('type') == 'send_request':
