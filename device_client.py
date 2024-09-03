@@ -29,7 +29,7 @@ class WServer:
         status_code = -1
         content = None
         try:
-            res = requests.get(url=data.get('url'), params=data.get('params'), auth=auth, timeout=100)
+            res = requests.get(auth=auth, timeout=100, **data)
             status_code = res.status_code
             text = res.text
             content = base64.b64encode(res.content).decode('utf-8') if 'cgi' in data.get('url') else None
