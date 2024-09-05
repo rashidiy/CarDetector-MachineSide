@@ -13,7 +13,7 @@ class WServer:
     security_key = os.getenv('SECURITY_KEY')
     device_id = os.getenv('DEVICE_ID')
     port = os.getenv('PORT', 443)
-    uri = f"{'wss' if port == 443 else 'ws'}://{os.getenv('HOST')}:{port}/device/{device_id}/?security_key={security_key}"
+    uri = f"{'wss' if port in ['443', 443] else 'ws'}://{os.getenv('HOST')}:{port}/device/{device_id}/?security_key={security_key}"
     websocket = client.WebSocketClientProtocol
 
     async def accepted(self):
