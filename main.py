@@ -5,7 +5,7 @@ import os
 import websockets as ws
 from dotenv import load_dotenv
 
-from adds import create_service_file
+from adds import create_service_file, enable_service
 
 load_dotenv()
 
@@ -36,6 +36,7 @@ class CompanyConsumer:
                 port=self.port,
                 python_path=os.getenv('PY_PATH')
             )
+            enable_service(datas.get('id').replace('-', '_'))
         if data.get('type') == 'send_request':
             await self.websocket.send(json.dumps({'ok': True}))
 
