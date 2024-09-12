@@ -15,7 +15,7 @@ class CompanyConsumer:
     security_key: str = os.getenv('SECURITY_KEY')
     host: str = os.getenv('HOST')
     port: int = os.getenv('PORT', 443)
-    url: str = f'wss://{host}:{port}/company/{company_id}/?security_key={security_key}'
+    url: str = f'{'wss' if port in ['443', 443] else 'ws'}://{host}:{port}/company/{company_id}/?security_key={security_key}'
     websocket: ws.WebSocketClientProtocol
 
     async def accepted(self):
