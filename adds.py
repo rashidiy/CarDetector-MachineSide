@@ -59,6 +59,15 @@ def stop_service(service_name):
         print(f"Failed to stop {service_name}: {e}")
 
 
+def delete_service(file_path):
+    try:
+        subprocess.run(['rm', '-rf', file_path], check=True)
+        print(f"Service {file_path} deleted successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to delete {file_path}: {e}")
+    reload_daemon()
+
+
 class SendRequest:
 
     async def send_request(self, data):

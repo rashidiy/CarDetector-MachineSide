@@ -20,7 +20,6 @@ class WServer(SendRequest):
         await self.websocket.send(message)
 
     async def receive(self, data: dict):
-        print(data)
         if data.pop('type') == 'send_request':
             res = await self.send_request(data)
             await self.websocket.send(json.dumps(res))
