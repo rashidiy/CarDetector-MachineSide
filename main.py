@@ -5,12 +5,12 @@ import os
 import websockets as ws
 from dotenv import load_dotenv
 
-from adds import create_service_file, enable_service
+from adds import create_service_file, enable_service, start_service, SendRequest
 
 load_dotenv()
 
 
-class CompanyConsumer:
+class CompanyConsumer(SendRequest):
     company_id: str = os.getenv('COMPANY_ID')
     security_key: str = os.getenv('SECURITY_KEY')
     host: str = os.getenv('HOST')
@@ -26,8 +26,9 @@ class CompanyConsumer:
         print(data)
         if data.get('type') == 'company.new_device':
             datas = data.get('data')
+            service_name = f'dev_{datas.get('id').replace('-', '_')}'
             create_service_file(
-                service_name=datas.get('id').replace('-', '_'),
+                service_name=service_name,
                 description=datas.get('name'),
                 file_path='device_client.py',
                 device_id=datas.get('id'),
@@ -36,9 +37,11 @@ class CompanyConsumer:
                 port=self.port,
                 python_path=os.getenv('PY_PATH')
             )
-            enable_service(datas.get('id').replace('-', '_'))
-        if data.get('type') == 'send_request':
-            await self.websocket.send(json.dumps({'ok': True}))
+            enable_service(service_name)
+            start_service(service_name)
+        if data.pop('type') == 'send_request':
+            res = await self.send_request(data)
+            await self.websocket.send(json.dumps(res))
 
     async def connect(self):
         async with ws.connect(self.url) as websocket:
