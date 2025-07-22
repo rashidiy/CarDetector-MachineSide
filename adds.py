@@ -69,7 +69,6 @@ def delete_service(file_path):
 
 
 class SendRequest:
-
     async def send_request(self, data):
         auth_credits = data.pop('auth')
         match auth_credits.get('type'):

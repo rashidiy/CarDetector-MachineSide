@@ -41,6 +41,7 @@ class CompanyConsumer(SendRequest):
     @staticmethod
     async def delete_device(data: dict):
         device_id = data.get('data', {}).get('id', '').replace('-', '_')
+        print(device_id)
         delete_service(f'/etc/systemd/system/dev_{device_id}.service')
 
     async def receive(self, data: dict):
@@ -62,6 +63,7 @@ class CompanyConsumer(SendRequest):
                 await self.receive(data)
 
     def main(self):
+        print('Successfully connected to %s' % self.host)
         return asyncio.run(self.connect())
 
 
