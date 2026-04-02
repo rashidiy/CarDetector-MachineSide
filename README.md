@@ -1,13 +1,13 @@
-# CarDetector-MachineSide
+# camera-edge-agent
 
-IoT edge agent that runs on the machine co-located with camera hardware. Maintains a persistent WebSocket connection to the CameraControlPanel backend, auto-provisions per-device systemd services, and relays HTTP requests to local camera devices — including Digest auth and base64-encoded image responses.
+IoT edge agent that runs on the machine co-located with camera hardware. Maintains a persistent WebSocket connection to the [camera-control-panel](https://github.com/rashidiy/camera-control-panel) backend, auto-provisions per-device systemd services, and relays HTTP requests to local camera devices — including Digest auth and base64-encoded image responses.
 
 ---
 
 ## Where it fits
 
 ```
-CameraControlPanel (remote server)
+camera-control-panel (remote server)
           │
           │  WebSocket (wss://)
           ▼
